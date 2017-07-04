@@ -106,7 +106,7 @@ public final class StatusUpdate implements java.io.Serializable {
     }
 
     public void setAutoPopulateReplyMetadata(boolean autoPopulateReplyMetadata) {
-        this.displayCoordinates = autoPopulateReplyMetadata;
+        this.autoPopulateReplyMetadata = autoPopulateReplyMetadata;
     }
 
     public StatusUpdate autoPopulateReplyMetadata(boolean autoPopulateReplyMetadata) {
