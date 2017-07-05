@@ -40,6 +40,7 @@ public final class StatusUpdate implements java.io.Serializable {
     private File mediaFile;
     private long[] mediaIds;
     private boolean autoPopulateReplyMetadata;
+    private long[] excludeReplyUserIds;
 
     public StatusUpdate(String status) {
         this.status = status;
@@ -112,6 +113,10 @@ public final class StatusUpdate implements java.io.Serializable {
     public StatusUpdate autoPopulateReplyMetadata(boolean autoPopulateReplyMetadata) {
         setAutoPopulateReplyMetadata(autoPopulateReplyMetadata);
         return this;
+    }
+
+    public void setExcludeReplyUserIds(long... excludeReplyUserIds) {
+        this.excludeReplyUserIds = excludeReplyUserIds;
     }
 
     /**
@@ -216,6 +221,9 @@ public final class StatusUpdate implements java.io.Serializable {
             params.add(new HttpParameter("media_ids", StringUtil.join(mediaIds)));
         }
         params.add(new HttpParameter("auto_populate_reply_metadata", autoPopulateReplyMetadata));
+        if (excludeReplyUserIds != null && excludeReplyUserIds.length >= 1) {
+            params.add(new HttpParameter("exclude_reply_user_ids", StringUtil.join(excludeReplyUserIds)));
+        }
         HttpParameter[] paramArray = new HttpParameter[params.size()];
         return params.toArray(paramArray);
     }
@@ -253,6 +261,7 @@ public final class StatusUpdate implements java.io.Serializable {
         if (placeId != null ? !placeId.equals(that.placeId) : that.placeId != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (autoPopulateReplyMetadata != that.autoPopulateReplyMetadata) return false;
+        if (excludeReplyUserIds != null ? !Arrays.equals(excludeReplyUserIds, that.excludeReplyUserIds) : that.excludeReplyUserIds != null) return false;
 
         return true;
     }
@@ -270,6 +279,7 @@ public final class StatusUpdate implements java.io.Serializable {
         result = 31 * result + (mediaFile != null ? mediaFile.hashCode() : 0);
         result = 31 * result + (mediaIds != null ? StringUtil.join(mediaIds).hashCode() : 0);
         result = 31 * result + (autoPopulateReplyMetadata ? 1 : 0);
+        result = 31 * result + (excludeReplyUserIds != null ? StringUtil.join(excludeReplyUserIds).hashCode() : 0);
         return result;
     }
 
@@ -287,6 +297,7 @@ public final class StatusUpdate implements java.io.Serializable {
             ", mediaFile=" + mediaFile +
             ", mediaIds=" + mediaIds +
             ", autoPopulateReplyMetadata=" + autoPopulateReplyMetadata +
+            ", excludeReplyUserIds=" + excludeReplyUserIds +
             '}';
     }
 }
