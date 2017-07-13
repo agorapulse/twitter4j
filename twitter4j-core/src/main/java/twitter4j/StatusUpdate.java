@@ -249,7 +249,6 @@ public final class StatusUpdate implements java.io.Serializable {
 
         StatusUpdate that = (StatusUpdate) o;
 
-        if (autoPopulateReplyMetadata != that.autoPopulateReplyMetadata) return false;
         if (displayCoordinates != that.displayCoordinates) return false;
         if (inReplyToStatusId != that.inReplyToStatusId) return false;
         if (possiblySensitive != that.possiblySensitive) return false;
