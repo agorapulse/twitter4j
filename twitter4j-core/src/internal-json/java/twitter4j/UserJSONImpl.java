@@ -259,13 +259,17 @@ import java.util.Date;
     private String toResizedURL(String originalURL, String sizeSuffix) {
         if (null != originalURL) {
             int index = originalURL.lastIndexOf("_");
-            int suffixIndex = originalURL.lastIndexOf(".");
-            int slashIndex = originalURL.lastIndexOf("/");
-            String url = originalURL.substring(0, index) + sizeSuffix;
-            if (suffixIndex > slashIndex) {
-                url += originalURL.substring(suffixIndex);
+            if (index > -1) {
+                int suffixIndex = originalURL.lastIndexOf(".");
+                int slashIndex = originalURL.lastIndexOf("/");
+                String url = originalURL.substring(0, index) + sizeSuffix;
+                if (suffixIndex > slashIndex) {
+                    url += originalURL.substring(suffixIndex);
+                }
+                return url;
+            } else {
+                return originalURL;
             }
-            return url;
         }
         return null;
     }
